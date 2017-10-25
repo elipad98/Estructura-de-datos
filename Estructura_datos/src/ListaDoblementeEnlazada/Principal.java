@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
@@ -17,13 +18,18 @@ import java.awt.event.ActionEvent;
 
 public class Principal extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField textid;
 	private JTextField textgenero;
 	private JTextField textartista;
 	private JTextField textcancion;
 	private JTextField textalbum;
-	private JTextField textlista;
+	private JTextArea textlista;
+	private ListaDE LD=new ListaDE();
 
 	/**
 	 * Launch the application.
@@ -58,7 +64,7 @@ public class Principal extends JFrame {
 		contentPane.add(lblqueOperacionDeseas);
 		
 		
-		JComboBox opciones = new JComboBox();
+		JComboBox<String> opciones = new JComboBox<String>();
 		opciones.setBounds(124, 366, 188, 20);
 		contentPane.add(opciones);
 		opciones.addItem("1.Insertar nodo adelante");
@@ -67,7 +73,8 @@ public class Principal extends JFrame {
 		opciones.addItem("4.Eliminar último nodo");
 		opciones.addItem("5.Recorrido hacia adelante");
 		opciones.addItem("6.Recorrido hacia atrás");
-		opciones.addItem("7.Imprimir Lista");
+		opciones.addItem("7.Imprimir Lista adelante");
+		opciones.addItem("8.Imprimir Lista atras");
 		
 		JLabel lblid = new JLabel("Id");
 		lblid.setBounds(64, 29, 46, 14);
@@ -114,7 +121,7 @@ public class Principal extends JFrame {
 		contentPane.add(textalbum);
 		textalbum.setColumns(10);
 		
-		textlista = new JTextField();
+		textlista = new JTextArea();
 		textlista.setBounds(64, 263, 321, 73);
 		contentPane.add(textlista);
 		textlista.setColumns(10);
@@ -131,18 +138,25 @@ public class Principal extends JFrame {
 				if(Opciones.getOpc().equals("1.Insertar nodo adelante"))
 				{
 					ListaDE mandar=new ListaDE();
-					NodoDE insertar=new NodoDE();
+					Musica insertar=new Musica();
 					insertar.setId(Integer.parseInt(textid.getText()));
 					insertar.setGenero(textid.getText());
 					insertar.setCancion(textcancion.getText());
 					insertar.setArtista(textartista.getText());
 					insertar.setAlbum(textalbum.getText());
-					mandar.insertarPrincipio(textid.getText(),textgenero.getText(),textartista.getText(),textcancion.getText(),textalbum.getText());
+					mandar.insertarPrincipio(insertar);
 					
 				}
 				if(Opciones.getOpc().equals("2.Insertar nodo atrás"))
 				{
-					
+					ListaDE mandar=new ListaDE();
+					Musica insertar=new Musica();
+					insertar.setId(Integer.parseInt(textid.getText()));
+					insertar.setGenero(textid.getText());
+					insertar.setCancion(textcancion.getText());
+					insertar.setArtista(textartista.getText());
+					insertar.setAlbum(textalbum.getText());
+					mandar.insertarFinal(insertar);
 				}
 				if(Opciones.getOpc().equals("3.Eliminar primer nodo"))
 				{
@@ -160,7 +174,11 @@ public class Principal extends JFrame {
 				{
 				
 				}
-				if(Opciones.getOpc().equals("7.Imprimir Lista"))
+				if(Opciones.getOpc().equals("7.Imprimir Lista adelante"))
+				{
+					 textlista.append(LD.imprimiradelante().toString());
+				}
+				if(Opciones.getOpc().equals("8.Imprimir Lista atras"))
 				{
 				
 				}
