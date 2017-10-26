@@ -71,10 +71,8 @@ public class Principal extends JFrame {
 		opciones.addItem("2.Insertar nodo atrás");
 		opciones.addItem("3.Eliminar primer nodo");
 		opciones.addItem("4.Eliminar último nodo");
-		opciones.addItem("5.Recorrido hacia adelante");
-		opciones.addItem("6.Recorrido hacia atrás");
-		opciones.addItem("7.Imprimir Lista adelante");
-		opciones.addItem("8.Imprimir Lista atras");
+		opciones.addItem("5.Imprimir Lista adelante");
+		opciones.addItem("6.Imprimir Lista atras");
 		
 		JLabel lblid = new JLabel("Id");
 		lblid.setBounds(64, 29, 46, 14);
@@ -160,27 +158,22 @@ public class Principal extends JFrame {
 				}
 				if(Opciones.getOpc().equals("3.Eliminar primer nodo"))
 				{
-					
+					ListaDE eliminar=new ListaDE();
+					eliminar.eliminarprimer();
+
 				}
 				if(Opciones.getOpc().equals("4.Eliminar último nodo"))
 				{
-					
+					ListaDE eliminar=new ListaDE();
+					eliminar.eliminarultimo();
 				}
-				if(Opciones.getOpc().equals("5.Recorrido hacia adelante"))
-				{
-				
-				}
-				if(Opciones.getOpc().equals("6.Recorrido hacia atrás"))
-				{
-				
-				}
-				if(Opciones.getOpc().equals("7.Imprimir Lista adelante"))
+				if(Opciones.getOpc().equals("5.Imprimir Lista adelante"))
 				{
 					 textlista.append(LD.imprimiradelante().toString());
 				}
-				if(Opciones.getOpc().equals("8.Imprimir Lista atras"))
+				if(Opciones.getOpc().equals("6.Imprimir Lista atras"))
 				{
-				
+					textlista.append(LD.imprimiratras().toString());
 				}
 				
 				

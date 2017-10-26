@@ -48,20 +48,25 @@ public class ListaDE {
 	
 	public void insertar(Musica datos) {// creamos un  metodo de tipo void con el nombre insertar al cual le mandaremos una variable int con el nombre valor
 		nd.setDatos(datos);// ponemos el valor que recibimos del metodo en el nodo 
+		nd.setAnterior(null);
 		nd.setSiguiente(null);// le asignamos el valor de null al siguiente nodo
 		this.cabeza=nd;
 	}
 	
 	public void insertarPrincipio(Musica datos) {// creamos un metodo con el nombre insertarPrincipio que recivira un valord de tipo entero
 		
-		if(this.isVacio()) {// abrimos un if para verificar si el nodo esta vacio 
+		if(isVacio()) {// abrimos un if para verificar si el nodo esta vacio 
 			this.insertar(datos);// si el nodo esta vacio se inserta el valor 
 		}else {// si no esta vacio se hace lo siguiente
+			NodoDE nd=new NodoDE();
+
 			nd.setDatos(datos);
-			nd.setSiguiente(this.cabeza);// Ponemos en el nodo siguiente el valor que hay en cabeza 
+			nd.setSiguiente(this.cabeza);
+			this.cabeza.setAnterior(nd);
+			nd.setAnterior(this.cabeza);// Ponemos en el nodo siguiente el valor que hay en cabeza 
 			this.cabeza=nd;// Le asignamos el valor de nuevo a la cabeza
 		}
-		System.out.println(cabeza.toString());
+		System.out.println(cabeza.getDatos().getCancion());
 		System.out.println(nd.getSiguiente());
 	JOptionPane.showMessageDialog(null, "Dato insertado al principio");
 	
@@ -82,46 +87,91 @@ public class ListaDE {
         }
         aux.setSiguiente(nd);
         nd.setAnterior(aux);
+        
 
         }
+        System.out.println(cola.getDatos().getCancion());
+		System.out.println(nd.getAnterior());
+        JOptionPane.showMessageDialog(null, "Dato insertado al final");
 	}
 	public boolean eliminarprimer()// Creamos un metodo de tipo boolean con el nombre eliminar que recibira dos valores enteros
 	{
+		boolean respuesta=false;
+		
 	     if (isVacio()!=true){
              NodoDE aux = this.cabeza;
              NodoDE ant = null;
              while (aux != null){
-                         if (aux.getDatos() == valor ){
-                                     if (ant == null){
-                                                 inicio = inicio.getSiguiente();
-                                                 aux.setSiguiente(null);
-                                                 aux= inicio;
-                                    
-                                     }else {
-                                                 ant.setSiguiente(aux.getSiguiente());
-                                                 aux.setSiguiente(null);
-                                                 aux = ant.getSiguiente();
-                                     }                                             
-                                     }else{
-                                                 ant = aux;
-                                                 aux = aux.getSiguiente();
-                                     }
+            	 this.cabeza = aux.getSiguiente();
+                 aux.setSiguiente(null);
+                 aux.setAnterior(null);
+                 aux= cabeza;
+                 respuesta=true;
                          }
+             aux.setAnterior(null);
+             aux.setSiguiente(null);
+             this.cabeza=null;
              }
+	     
+	     
+	     JOptionPane.showMessageDialog(null,"Nodo eliminado");
 		return respuesta;// regresamos el valor de la variable respuesta
 	}
-	public StringBuilder imprimiradelante() {// creamos un metodo de tipo StringBuilder con el nombre de imprimir
-		StringBuilder cadena=new StringBuilder();// Creamos una instancia para poder usar la clase StringBuilder
-		cadena.append("Cabeza-->");// mostramos el mensaje de cabeza al principio
-		NodoDE temporal=this.cabeza;//creamos una variable de tipo NodoSimple con el nombre de temporal y le asignamos el valor de la cabeza 
-		while(temporal!=null) {// hacemos el recorrido hasta que la cabeza sea diferente a nulo
-			cadena.append(temporal.getDatos().getCancion());//Mostramos los datos que se vallan almacenando en temporal 
-			cadena.append("-->");// Mostramos una flecha para separar los datos en cada vuelta
-			temporal=temporal.getSiguiente();// le asignamos el valor del siguiente nodo a la variable temporal 
+	public boolean eliminarultimo()// Creamos un metodo de tipo boolean con el nombre eliminar que recibira dos valores enteros
+	{
+		boolean respuesta=false;
+	     if (isVacio()!=true){
+             NodoDE aux = this.cabeza;
+             NodoDE ant = null;
+             while (aux != null){
+            	 this.cabeza =null;
+                 aux.setSiguiente(null);
+                 aux.setAnterior(null);
+                 aux= cabeza;
+                 respuesta=true;
+                         }
+             while(aux.getSiguiente()!=null)
+             {
+            	 aux=aux.getSiguiente();
+             }
+             aux.getAnterior().setSiguiente(null);
+             aux.setAnterior(null);
+             aux.setSiguiente(null);
+             this.cabeza=null;
+             }
+	     JOptionPane.showMessageDialog(null,"Nodo eliminado");
+
+		return respuesta;// regresamos el valor de la variable respuesta
+	}
+	public StringBuilder imprimiradelante(){
+		StringBuilder cadena = new StringBuilder();
+		cadena.append("Cabeza/Null <===>");
+		NodoDE temporal = this.cabeza;		
+		while(temporal!=null){
+			cadena.append(temporal.getDatos().getCancion()+"<===>");
+			temporal=temporal.getSiguiente();
 		}
-		cadena.append("NULL");// mostramos el mensaje de null al final de la lista
-		System.out.println(cadena);
-		return cadena;// regresamos el valor de cadena 
+		cadena.append("Null");
+		return cadena;
+	}
+	public StringBuilder imprimiratras(){
+		StringBuilder cadena = new StringBuilder();
+		if(isVacio()){
+			cadena.append("Null <===> Cabeza/Null");
+		}else{
+			cadena.append("Null <===>");
+			NodoDE temporal = this.cola;
+			while(temporal.getSiguiente()!=null){
+				temporal=temporal.getSiguiente();
+			}
+			while(temporal!=null){
+				
+					cadena.append(temporal.getDatos().getCancion()+"<===>");
+					temporal=temporal.getAnterior();
+			}
+			cadena.append("Cabeza/Null");
+		}
+		return cadena;
 	}
 	
 }
