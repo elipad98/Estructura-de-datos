@@ -7,7 +7,7 @@ import Unidad3.NodoSimple;
 public class ListaDE {
 	private NodoDE cola;
 	private NodoDE cabeza;
-	private NodoDE nd=new NodoDE();
+	
 	
 	
 	
@@ -47,37 +47,39 @@ public class ListaDE {
 	}
 	
 	public void insertar(Musica datos) {// creamos un  metodo de tipo void con el nombre insertar al cual le mandaremos una variable int con el nombre valor
-		nd.setDatos(datos);// ponemos el valor que recibimos del metodo en el nodo 
-		nd.setAnterior(null);
-		nd.setSiguiente(null);// le asignamos el valor de null al siguiente nodo
-		this.cabeza=nd;
+		NodoDE nunod=new NodoDE();
+		nunod.setDatos(datos);// ponemos el valor que recibimos del metodo en el nodo 
+		nunod.setAnterior(null);
+		nunod.setSiguiente(null);// le asignamos el valor de null al siguiente nodo
+		this.cabeza=nunod;
 	}
 	
 	public void insertarPrincipio(Musica datos) {// creamos un metodo con el nombre insertarPrincipio que recivira un valord de tipo entero
-		
+		NodoDE nod=new NodoDE();
 		if(isVacio()) {// abrimos un if para verificar si el nodo esta vacio 
 			this.insertar(datos);// si el nodo esta vacio se inserta el valor 
 		}else {// si no esta vacio se hace lo siguiente
-			NodoDE nd=new NodoDE();
+			
 
-			nd.setDatos(datos);
-			nd.setSiguiente(this.cabeza);
-			this.cabeza.setAnterior(nd);
-			nd.setAnterior(this.cabeza);// Ponemos en el nodo siguiente el valor que hay en cabeza 
-			this.cabeza=nd;// Le asignamos el valor de nuevo a la cabeza
+			nod.setDatos(datos);
+			nod.setSiguiente(this.cabeza);
+			this.cabeza.setAnterior(nod);
+			nod.setAnterior(this.cabeza);// Ponemos en el nodo siguiente el valor que hay en cabeza 
+			this.cabeza=nod;// Le asignamos el valor de nuevo a la cabeza
 		}
 		System.out.println(cabeza.getDatos().getCancion());
-		System.out.println(nd.getSiguiente());
+		System.out.println(nod.getSiguiente());
 	JOptionPane.showMessageDialog(null, "Dato insertado al principio");
 	
 
 }
 	public void insertarFinal(Musica datos)
 	{
+		NodoDE nud=new NodoDE();
         if(this.iscolaVacio()){
-        nd.setDatos(datos);
-        nd.setSiguiente(null);
-        this.cola=nd;
+        nud.setDatos(datos);
+        nud.setSiguiente(null);
+        this.cola=nud;
         }else{
         
         NodoDE aux = cola;
@@ -85,13 +87,13 @@ public class ListaDE {
         aux = aux.getSiguiente();
        
         }
-        aux.setSiguiente(nd);
-        nd.setAnterior(aux);
+        aux.setSiguiente(nud);
+        nud.setAnterior(aux);
         
 
         }
         System.out.println(cola.getDatos().getCancion());
-		System.out.println(nd.getAnterior());
+		System.out.println(nud.getAnterior());
         JOptionPane.showMessageDialog(null, "Dato insertado al final");
 	}
 	public boolean eliminarprimer()// Creamos un metodo de tipo boolean con el nombre eliminar que recibira dos valores enteros
